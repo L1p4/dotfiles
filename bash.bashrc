@@ -1,4 +1,12 @@
-
+#   _               _              
+#  | |             | |             
+#  | |__   __ _ ___| |__  _ __ ___ 
+#  | '_ \ / _` / __| '_ \| '__/ __|
+#  | |_) | (_| \__ \ | | | | | (__ 
+#  |_.__/ \__,_|___/_| |_|_|  \___|
+#/etc/bash.bashrc
+                                 
+                                 
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -27,16 +35,6 @@ complete -c man
 complete -cf sudo
 stty -ixon
 
-PS1='[\u@\h \W]\$ '
-
-case ${TERM} in
-  xterm*|rxvt*|Eterm|aterm|kterm|gnome*)
-    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
-
-    ;;
-  screen*)
-    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
-    ;;
-esac
+export PS1="\[\e[32m\]\u\[\e[m\]@\[\e[36m\]\h\[\e[m\]\[\e[36m\]:\[\e[m\]\W\[\e[32m\]$\[\e[m\] "
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
