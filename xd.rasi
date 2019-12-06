@@ -1,0 +1,76 @@
+/*
+          _                 _ 
+         | |               (_)
+ __  ____| |  _ __ __ _ ___ _ 
+ \ \/ / _` | | '__/ _` / __| |
+  >  < (_| |_| | | (_| \__ \ |
+ /_/\_\__,_(_)_|  \__,_|___/_|
+/usr/share/rofi/xd.rasi
+*/
+
+*{
+// colors
+green: #33ff00;
+gray-background: rgba(85, 85, 85, 0.9);
+red: #660000;
+magenta: #FC0FC0;
+transparent: rgba(0,0,0,0);
+// propertys
+    background-color: rgba(0,0,0,0);
+    border-color: @green; 
+}
+
+window{
+    transparency: "screenshot";
+    background-color: @transparent;
+    border: 1; 
+    location: center;
+    anchor:   center;
+    padding: 8px;
+    border-radius: 3;
+    background-color: rgba(0,0,0,0.85);
+}
+
+#inputbar{
+    font: "Kremlin 13";
+    text-color: @green;
+    padding: 1px;
+}
+
+#entry {
+    font: "Kremlin 13";
+    spacing:    0;
+    text-color: @green;
+}
+#prompt {
+    spacing:    0;
+    text-color: @green;
+    font: "Kremlin 13";
+    padding: 0px 7px 0px 0px;
+}
+
+#listview{
+    border:       1px dash 0px 0px ;
+    spacing: 2px;
+    scrollbar: true;
+    padding:      8px 0px 0px 0px;
+}
+
+scrollbar{
+    handle-width: 7px;
+    handle-color: @red;
+}
+
+element{
+    text-color: @green;
+    padding: 1px 0px 1px 1px;
+    font: "Terminus 13";
+}
+
+#element alternate.normal {
+    background-color: @background-gray;
+}
+
+#element selected.normal {
+    background-color: @gray-background;
+}
