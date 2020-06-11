@@ -1,0 +1,10 @@
+# This file is parsed by pam_env module
+# Syntax: simple "KEY=VAL" pairs on separate lines
+
+DRI_PRIME=1
+TERMINAL=st
+SHELL=/usr/bin/bash
+PAGER=/usr/bin/less
+EDITOR=/usr/bin/vim
+BROWSER=/sbin/firefox
+
