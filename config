@@ -12,12 +12,19 @@
 
 # windows key as mod
 set $mod Mod4
+
+# mod is alt
+#set $mod MoD1
+
 # font
-font pango: Kremlin 8
-# i3 lock
-bindsym $mod+Shift+p exec --no-startup-id i3lock --image=pix/lock.png --show-failed-attempts --tiling
+font pango: Comic Sans MS 8
+
+# i3lock-color
+bindsym $mod+Shift+p exec --no-startup-id i3lock --image=pix/lock.png --show-failed-attempts --tiling --pass-media-keys --clock --insidecolor=ffffff00 --insidevercolor=ffffff00 --insidewrongcolor=66000094 --ringcolor=bc13feff --line-uses-inside --ringwrongcolor=660000ff --ringvercolor=00ff00c0 --separatorcolor=00000080 --wrongcolor=ffffff80 --timecolor=ffffffff --datecolor=ffffffff --veriftext="wasting time..." --noinputtext="NULL" --wrongtext="nope" --radius=110 --ring-width=10 --wrong-font=crucifixion --wrongsize=50 --verif-font=comic-sans
+
 # network manager
 exec --no-startup-id nm-applet
+
 #wallpaper
 exec_always --no-startup-id feh --bg-scale /home/juri/pix/background.jpg
 
@@ -30,49 +37,65 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym $mod+F7  exec --no-startup-id i3-volume -n -i 5 -e 3000
 bindsym $mod+F6 exec --no-startup-id i3-volume -n -d 5 -e 3000
 bindsym $mod+F8 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
 # Brightness
 bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
+# keyboard layout
+exec_always --no-startup-id setxkbmap -layout us,si
+exec_always --no-startup-id setxkbmap -option 'grp:lctrl_lwin_toggle'
+
 
 ####       navigation bindings       ####
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+# Use $mod+left_click to drag floating windows to their wanted position
 floating_modifier $mod
+
 # kill focused window
 bindsym $mod+Shift+q kill
+
 # change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
 # move focused window
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
 # split in horizontal orientation
 bindsym $mod+c split h
+
 # split in vertical orientation
 bindsym $mod+v split v
+
 # enter fullscreen mode for the focused container
 bindsym $mod+Shift+F11 fullscreen toggle
+
 # change container layout 
 bindsym $mod+w layout tabbed
 bindsym $mod+q layout toggle split
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-# focus the parent container
-#bindsym $mod+< focus parent
-# focus the child container
-#bindsym $mod+Shift+< focus child
+
+# numpad 8
+bindcode $mod+80 focus parent
+
+# numpad 2
+bindcode $mod+Shift+88 focus child
 
 
+####        workspace        ####
 
-####        workspace bindings         ####
-
+# "names"
 set $ws1 "1: terminal"
 set $ws2 "2: browser"
 set $ws3 "3: other"
@@ -83,6 +106,7 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -94,6 +118,7 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
@@ -104,7 +129,6 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-
 
 
 ####        gaps bindings        ####
@@ -119,7 +143,6 @@ bindsym $mod+Shift+n gaps outer current minus 5
 bindsym $mod+Shift+m gaps outer current plus 5
 
 
-
 ####        launch applications        ####
 
 bindsym $mod+d exec firefox
@@ -127,49 +150,54 @@ bindsym $mod+h exec st htop
 bindsym $mod+e exec st ranger
 bindsym $mod+f exec rofi -theme xd -show drun
 bindsym $mod+l exec st nmtui
+bindsym --relese Print exec spetctacle
 # start a terminal
+
 bindsym $mod+Return exec i3-sensible-terminal
+# z(US)/y(SLO)
+
 bindcode $mod+52 exec i3-sensible-terminal
 
 ####        other       ####
+
 # reload the configuration file
-#bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+o exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
+# resize window 
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym Left resize shrink width 5 px or 5 ppt
         bindsym Down resize grow height 5 px or 5 ppt
         bindsym Up resize shrink height 5 px or 5 ppt
         bindsym Right resize grow width 5 px or 5 ppt
-
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
-#borders and their colors
+# borders
 hide_edge_borders smart
 for_window [class="^.*"] border pixel 2
+
+# assign windows to workspece
+assign [class="discord"] → $ws1
+assign [class="teams"] → $ws1
+assign [class="firefox"] → $ws2
+
+
 # class                 border  backgr. text    indicator child_border
 client.focused          #bc13fe #848482 #ffffff #bc13fe   #dc13fe
 client.focused_inactive #333333 #36454f #ffffff #484e50   #5f676a
 client.unfocused        #333333 #36454f #ffffff #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
 client.background       #ffffff
 
+
+####     polybar     ####
 exec_always --no-startup-id  source /home/juri/.config/polybar/launch.sh
