@@ -1,4 +1,4 @@
-#/etc/enviorment
+#/etc/enviornment
 #
 # speled wrong
 #                  _                                 _   
@@ -6,7 +6,7 @@
 #   ___ _ ____   ___  ___  _ __ _ __ ___   ___ _ __ | |_ 
 #  / _ \ '_ \ \ / / |/ _ \| '__| '_ ` _ \ / _ \ '_ \| __|
 # |  __/ | | \ V /| | (_) | |  | | | | | |  __/ | | | |_ 
- # \___|_| |_|\_/ |_|\___/|_|  |_| |_| |_|\___|_| |_|\__|
+#  \___|_| |_|\_/ |_|\___/|_|  |_| |_| |_|\___|_| |_|\__|
                                                         
                                                         
 
@@ -14,7 +14,7 @@
 # This file is parsed by pam_env module
 # Syntax: simple "KEY=VAL" pairs on separate lines
 
-DRI_PRIME=1
+#DRI_PRIME=1
 TERMINAL=st
 SHELL=/usr/bin/bash
 PAGER=/usr/bin/less
