@@ -9,7 +9,6 @@
 #                                    |___/ 
 
 
-
 # windows key as mod
 set $mod Mod4
 
@@ -17,25 +16,26 @@ set $mod Mod4
 #set $mod MoD1
 
 # font
-font pango: Comic Sans MS 8
+#font pango: Comic Sans MS 8
 
 # i3lock-color
-bindsym $mod+Shift+p exec --no-startup-id i3lock --image=pix/lock.png --show-failed-attempts --tiling --pass-media-keys --clock --insidecolor=ffffff00 --insidevercolor=ffffff00 --insidewrongcolor=66000094 --ringcolor=bc13feff --line-uses-inside --ringwrongcolor=660000ff --ringvercolor=00ff00c0 --separatorcolor=00000080 --wrongcolor=ffffff80 --timecolor=ffffffff --datecolor=ffffffff --veriftext="wasting time..." --noinputtext="NULL" --wrongtext="nope" --radius=110 --ring-width=10 --wrong-font=crucifixion --wrongsize=50 --verif-font=comic-sans
-
+bindsym $mod+Shift+p exec --no-startup-id i3lock --image=pix/lock.png --show-failed-attempts --tiling --pass-media-keys --clock --insidecolor=ffffff00 --insidevercolor=ffffff00 --insidewrongcolor=66000094 --ringcolor=bc13feff --line-uses-inside --ringwrongcolor=660000ff --ringvercolor=00ff00c0 --separatorcolor=00000080 --wrongcolor=ffffff80 --timecolor=ffffffff --datecolor=ffffffff --veriftext="wasting time..." --noinputtext="NONE" --wrongtext="nope" --radius=110 --ring-width=10 --wrong-font=crucifixion --wrongsize=50 --verif-font=comic-sans
 # network manager
 exec --no-startup-id nm-applet
+# auto lock
+#exec --no-startup-id xautolock -time 25 -detectsleep -locker 'i3lock --image=pix/lock.png --show-failed-attempts --tiling --pass-media-keys --clock --insidecolor=ffffff00 --insidevercolor=ffffff00 --insidewrongcolor=66000094 --ringcolor=bc13feff --line-uses-inside --ringwrongcolor=660000ff --ringvercolor=00ff00c0 --separatorcolor=00000080 --wrongcolor=ffffff80 --timecolor=ffffffff --datecolor=ffffffff --veriftext="wasting time..." --noinputtext="NONE" --wrongtext="nope" --radius=110 --ring-width=10 --wrong-font=crucifixion --wrongsize=50 --verif-font=comic-sans'
 
-#wallpaper
-exec_always --no-startup-id feh --bg-scale /home/juri/pix/background.jpg
+# numlock
+exec_always --no-startup-id numlockx on
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id i3-volume -n -i 5 -e 3000
-bindsym XF86AudioLowerVolume exec --no-startup-id i3-volume -n -d 5 -e 3000
-bindsym XF86AudioMute exec --no-startup-id i3-volume -n -m -e 3000
+bindsym XF86AudioRaiseVolume exec --no-startup-id i3-volume -n -X 10 up 5 
+bindsym XF86AudioLowerVolume exec --no-startup-id i3-volume -n -X 10 down 5
+bindsym XF86AudioMute exec --no-startup-id i3-volume -n mute
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-bindsym $mod+F7  exec --no-startup-id i3-volume -n -i 5 -e 3000
-bindsym $mod+F6 exec --no-startup-id i3-volume -n -d 5 -e 3000
+bindsym $mod+F7  exec --no-startup-id i3-volume -n -X 10 up 5 
+bindsym $mod+F6 exec --no-startup-id i3-volume -n -X 10 down 5 
 bindsym $mod+F8 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Brightness
@@ -43,9 +43,11 @@ bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
 # keyboard layout
-exec_always --no-startup-id setxkbmap -layout us,si
-exec_always --no-startup-id setxkbmap -option 'grp:lctrl_lwin_toggle'
+exec_always --no-startup-id setxkbmap -option 'grp:lctrl_lwin_toggle' -layout us,si
 
+
+#wallpaper
+exec_always --no-startup-id feh --bg-scale /home/juri/pix/background.jpg
 
 ####       navigation bindings       ####
 
@@ -54,6 +56,7 @@ floating_modifier $mod
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $mod+Control+Shift+q kill -n 9
 
 # change focus
 bindsym $mod+Left focus left
@@ -96,11 +99,11 @@ bindcode $mod+Shift+88 focus child
 ####        workspace        ####
 
 # "names"
-set $ws1 "1: terminal"
-set $ws2 "2: browser"
-set $ws3 "3: other"
-set $ws4 "4: other"
-set $ws5 "5: productivity"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -118,6 +121,17 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+# switch with numpad
+bindsym $mod+Mod2+KP_1 workspace $ws1
+bindsym $mod+Mod2+KP_2 workspace $ws2
+bindsym $mod+Mod2+KP_3 workspace $ws3
+bindsym $mod+Mod2+KP_4 workspace $ws4
+bindsym $mod+Mod2+KP_5 workspace $ws5
+bindsym $mod+Mod2+KP_6 workspace $ws6
+bindsym $mod+Mod2+KP_7 workspace $ws7
+bindsym $mod+Mod2+KP_8 workspace $ws8
+bindsym $mod+Mod2+KP_9 workspace $ws9
+bindsym $mod+Mod2+KP_0 workspace $ws0
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -129,7 +143,17 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-
+# move focused container with numpad
+bindsym $mod+Shift+Mod2+KP_End move container to workspace $ws1
+bindsym $mod+Shift+Mod2+KP_Down move container to workspace $ws2
+bindsym $mod+Shift+Mod2+KP_Next move container to workspace $ws3
+bindsym $mod+Shift+Mod2+KP_Left move container to workspace $ws4
+bindsym $mod+Shift+Mod2+KP_Begin move container to workspace $ws5
+bindsym $mod+Shift+Mod2+KP_Right move container to workspace $ws6
+bindsym $mod+Shift+Mod2+KP_Home move container to workspace $ws7
+bindsym $mod+Shift+Mod2+KP_Up move container to workspace $ws8
+bindsym $mod+Shift+Mod2+KP_Prior move container to workspace $ws9
+bindsym $mod+Shift+Mod2+KP_Insert move container to workspace $ws10
 
 ####        gaps bindings        ####
 
@@ -147,10 +171,12 @@ bindsym $mod+Shift+m gaps outer current plus 5
 
 bindsym $mod+d exec firefox
 bindsym $mod+h exec st htop
-bindsym $mod+e exec st ranger
-bindsym $mod+f exec rofi -theme xd -show drun
+bindsym $mod+e exec nemo
+bindsym $mod+f exec rofi -theme /usr/share/rofi/themes/xd.rasi -show drun -show-icons
+
 bindsym $mod+l exec st nmtui
-bindsym --relese Print exec spetctacle
+bindsym $mod+Shift+l exec bluetoothctl power on && st bluetoothctl
+bindsym --release Print exec spectacle
 # start a terminal
 
 bindsym $mod+Return exec i3-sensible-terminal
@@ -184,12 +210,6 @@ bindsym $mod+r mode "resize"
 hide_edge_borders smart
 for_window [class="^.*"] border pixel 2
 
-# assign windows to workspece
-assign [class="discord"] → $ws1
-assign [class="teams"] → $ws1
-assign [class="firefox"] → $ws2
-
-
 # class                 border  backgr. text    indicator child_border
 client.focused          #bc13fe #848482 #ffffff #bc13fe   #dc13fe
 client.focused_inactive #333333 #36454f #ffffff #484e50   #5f676a
@@ -197,7 +217,6 @@ client.unfocused        #333333 #36454f #ffffff #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
-
 
 ####     polybar     ####
 exec_always --no-startup-id  source /home/juri/.config/polybar/launch.sh
