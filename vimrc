@@ -24,6 +24,11 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'lilydjwg/colorizer'
 Plugin 'Yggdroot/indentLine'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'vim-scripts/restore_view.vim'
+Plugin 'vim-scripts/a.vim'
+Plugin 'tenfyzhong/vim-gencode-cpp'
+Plugin 'katono/rogue.vim'
 
 call vundle#end()
 filetype plugin indent on    " required vundle thing
